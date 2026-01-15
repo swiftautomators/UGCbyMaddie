@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, Loader2, Zap, AlertCircle } from 'lucide-react';
-import { generateStrategyAction } from '@/app/actions';
+import { supabase } from '@/lib/supabase';
 import { useQuery } from '@tanstack/react-query';
 
 const StrategyAI: React.FC = React.memo(() => {
@@ -13,8 +13,11 @@ const StrategyAI: React.FC = React.memo(() => {
   const { data: strategy, isLoading, error } = useQuery({
     queryKey: ['strategy', searchTerm],
     queryFn: async () => {
-      // Let the exception propagate so useQuery sets an actual error state
-      return await generateStrategyAction(searchTerm);
+      const { data, error } = await supabase.functions.invoke('generate-strategy', {
+        body: { product: searchTerm }
+      });
+      if (error) throw error;
+      return data;
     },
     enabled: !!searchTerm,
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
