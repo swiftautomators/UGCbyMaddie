@@ -1,8 +1,9 @@
+"use client";
 
 import React from 'react';
 import { CheckCircle2, Zap, Calendar, FileVideo, ShieldCheck } from 'lucide-react';
 
-const Services: React.FC = () => {
+const Services: React.FC = React.memo(() => {
   const packages = [
     {
       title: "The Hook Factory",
@@ -46,9 +47,9 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <section id="services" className="py-24 px-6 max-w-7xl mx-auto">
+    <section id="services" className="py-24 px-6 max-w-7xl mx-auto" aria-labelledby="services-heading">
       <div className="text-center mb-16">
-        <h2 className="text-4xl font-heading font-extrabold mb-4">Packages Built for ROI</h2>
+        <h2 id="services-heading" className="text-4xl font-heading font-extrabold mb-4">Packages Built for ROI</h2>
         <p className="text-gray-400 max-w-2xl mx-auto">
           Choose a strategy that fits your current stage. All content is built using my high-aesthetic, direct-response framework.
         </p>
@@ -56,18 +57,19 @@ const Services: React.FC = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {packages.map((pkg, i) => (
-          <div 
-            key={i} 
-            className={`relative glass-card p-8 rounded-[2.5rem] flex flex-col ${
-              pkg.recommended ? 'border-purple-500/50 scale-105 shadow-2xl shadow-purple-500/10 z-10' : ''
-            }`}
+          <div
+            key={i}
+            className={`relative glass-card p-8 rounded-[2.5rem] flex flex-col ${pkg.recommended ? 'border-purple-500/50 scale-105 shadow-2xl shadow-purple-500/10 z-10' : ''
+              }`}
+            role="article"
+            aria-label={`${pkg.title} package - ${pkg.price}`}
           >
             {pkg.recommended && (
               <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-purple-600 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest">
                 Most Popular
               </div>
             )}
-            
+
             <div className="mb-8">
               <h3 className="text-2xl font-heading font-bold mb-2">{pkg.title}</h3>
               <div className="flex items-baseline gap-1 mb-4">
@@ -80,17 +82,17 @@ const Services: React.FC = () => {
             <div className="space-y-4 mb-10 flex-1">
               {pkg.features.map((feat, idx) => (
                 <div key={idx} className="flex items-center gap-3 text-sm text-gray-300">
-                  <CheckCircle2 size={18} className="text-purple-500 shrink-0" />
+                  <CheckCircle2 size={18} className="text-purple-500 shrink-0" aria-hidden="true" />
                   {feat}
                 </div>
               ))}
             </div>
 
-            <a 
-              href="#contact" 
-              className={`w-full py-4 rounded-2xl font-bold transition-all text-center ${
-                pkg.recommended ? 'bg-white text-black hover:bg-purple-50' : 'bg-white/5 text-white hover:bg-white/10'
-              }`}
+            <a
+              href="#contact"
+              aria-label={`Get started with ${pkg.title} package`}
+              className={`w-full py-4 rounded-2xl font-bold transition-all text-center ${pkg.recommended ? 'bg-white text-black hover:bg-purple-50' : 'bg-white/5 text-white hover:bg-white/10'
+                }`}
             >
               Secure My Spot
             </a>
@@ -101,7 +103,7 @@ const Services: React.FC = () => {
       <div className="mt-16 glass-card p-8 rounded-3xl flex flex-col md:flex-row items-center justify-between gap-8 border-white/5">
         <div className="flex items-center gap-6">
           <div className="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-purple-400">
-            <ShieldCheck size={32} />
+            <ShieldCheck size={32} aria-hidden="true" />
           </div>
           <div>
             <h4 className="font-bold text-lg">Usage Rights & Policy</h4>
@@ -115,13 +117,15 @@ const Services: React.FC = () => {
             <div className="text-xs text-gray-500 uppercase font-bold tracking-widest">Questions?</div>
             <div className="text-sm font-bold">Maddie@UGCbyMaddie.com</div>
           </div>
-          <a href="mailto:Maddie@UGCbyMaddie.com" className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors">
-            <Calendar />
+          <a href="mailto:Maddie@UGCbyMaddie.com" className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors" aria-label="Send email to Maddie">
+            <Calendar aria-hidden="true" />
           </a>
         </div>
       </div>
     </section>
   );
-};
+});
+
+Services.displayName = 'Services';
 
 export default Services;
