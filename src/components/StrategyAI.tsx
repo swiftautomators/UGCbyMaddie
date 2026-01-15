@@ -1,6 +1,6 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, Send, Loader2, Zap, AlertCircle } from 'lucide-react';
 import { generateStrategyAction } from '@/app/actions';
