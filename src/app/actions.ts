@@ -10,11 +10,13 @@ export async function generateStrategyAction(product: string) {
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
         console.error("GEMINI_API_KEY is not set");
-        // Fallback if API key is missing during setup
+        // Fallback with annotation for development detection
         return {
             hook: "Show the product in use with a high-impact 'Wait, I didn't know it could do that' sound.",
             angle: "Utility-focused direct response with native TikTok UI overlays (Development Fallback).",
-            why: "Social proof combined with a pattern interrupt works best for low-ticket affiliate impulse buys."
+            why: "Social proof combined with a pattern interrupt works best for low-ticket affiliate impulse buys.",
+            isFallback: true,
+            message: "Missing GEMINI_API_KEY. Using mock performance data."
         };
     }
 
@@ -31,7 +33,7 @@ export async function generateStrategyAction(product: string) {
         const response = await result.response;
         const text = response.text();
         const { parseAIResponse } = await import('@/lib/utils');
-        return parseAIResponse(text);
+        return { ...parseAIResponse(text), isFallback: false };
     } catch (error) {
         console.error("AI Strategy Generation Error:", error);
         throw new Error("Failed to generate strategy. Please try again.");
@@ -42,14 +44,19 @@ export async function submitInquiryAction(data: {
     email: string;
     project_type: string;
     budget_tier: string;
-    details: any;
+    details: Record<string, unknown>;
 }) {
     const { createClient } = await import('@supabase/supabase-js');
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
     if (!supabaseUrl || !supabaseKey) {
-        throw new Error("Supabase configuration is missing");
+        throw new Error("Critical: SUPABASE_SERVICE_ROLE_KEY or URL is not configured. SubmitInquiryAction aborted.");
+    }
+
+    // Basic runtime validation
+    if (!data.email.includes('@')) {
+        throw new Error("Invalid submission data.");
     }
 
     const supabase = createClient(supabaseUrl, supabaseKey);
@@ -67,7 +74,8 @@ export async function submitInquiryAction(data: {
 
     if (error) {
         console.error("Supabase Submission Error:", error);
-        throw new Error(error.message);
+        // Generic client-facing message to avoid leaking DB details
+        throw new Error("Submission failed. Please try again later.");
     }
 
     return { success: true };

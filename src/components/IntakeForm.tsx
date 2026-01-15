@@ -37,7 +37,12 @@ const IntakeForm: React.FC = React.memo(() => {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      projectType: 'TikTok Shop'
+      name: '',
+      email: '',
+      brandName: '',
+      budget: '' as any, // Type cast to allow empty string as initial placeholder
+      projectType: 'TikTok Shop',
+      message: ''
     }
   });
 
@@ -157,11 +162,12 @@ const IntakeForm: React.FC = React.memo(() => {
             <select
               {...register('budget')}
               id="budget"
+              defaultValue=""
               aria-invalid={errors.budget ? "true" : "false"}
               aria-describedby={errors.budget ? "budget-error" : undefined}
               className={`w-full bg-white/5 border ${errors.budget ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors appearance-none`}
             >
-              <option value="" className="bg-black">Select Tier</option>
+              <option value="" disabled hidden className="bg-black">Select Tier</option>
               <option value="$1500-$3000" className="bg-black">$1,500 - $3,000</option>
               <option value="$3000-$5000" className="bg-black">$3,000 - $5,000</option>
               <option value=">$5000" className="bg-black">$5,000+</option>
