@@ -3,7 +3,7 @@ trigger: always_on
 ---
 
 
-## mission.md
+## mission.md (Reuse or Update from Previous)
 ```markdown
 # MISSION: UGC by Maddie Website Redesign
 

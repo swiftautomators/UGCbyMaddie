@@ -78,10 +78,10 @@ const IntakeForm: React.FC = React.memo(() => {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="glass-card p-12 rounded-[2.5rem] border-emerald-500/20"
+          className="glass-card p-12 rounded-[2.5rem] border-[#6b705c]/20"
         >
-          <div className="w-20 h-20 rounded-full bg-emerald-500/10 flex items-center justify-center mx-auto mb-6">
-            <CheckCircle2 size={40} className="text-emerald-500" aria-hidden="true" />
+          <div className="w-20 h-20 rounded-full bg-[#6b705c]/10 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle2 size={40} className="text-[#a5a58d]" aria-hidden="true" />
           </div>
           <h2 className="text-3xl font-heading font-extrabold mb-4">Application Received!</h2>
           <p className="text-gray-400 mb-8">
@@ -103,7 +103,7 @@ const IntakeForm: React.FC = React.memo(() => {
     <section id="contact" className="py-24 px-6 relative overflow-hidden" aria-labelledby="contact-heading">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#cb997e]/10 border border-[#cb997e]/20 text-[#cb997e] text-xs font-bold uppercase tracking-wider mb-6">
             LET&apos;S WORK TOGETHER
           </div>
           <h2 id="contact-heading" className="text-4xl md:text-6xl font-heading font-extrabold mb-6">Apply to the Roster</h2>
@@ -125,7 +125,7 @@ const IntakeForm: React.FC = React.memo(() => {
               placeholder="Maddie Thompson"
               aria-invalid={errors.name ? "true" : "false"}
               aria-describedby={errors.name ? "name-error" : undefined}
-              className={`w-full bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors`}
+              className={`w-full bg-white/5 border ${errors.name ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-[#cb997e] focus:outline-none transition-colors`}
             />
             {errors.name && <p id="name-error" className="text-xs text-red-500 mt-1 ml-1" role="alert">{errors.name.message}</p>}
           </div>
@@ -139,7 +139,7 @@ const IntakeForm: React.FC = React.memo(() => {
               placeholder="brand@example.com"
               aria-invalid={errors.email ? "true" : "false"}
               aria-describedby={errors.email ? "email-error" : undefined}
-              className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors`}
+              className={`w-full bg-white/5 border ${errors.email ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-[#cb997e] focus:outline-none transition-colors`}
             />
             {errors.email && <p id="email-error" className="text-xs text-red-500 mt-1 ml-1" role="alert">{errors.email.message}</p>}
           </div>
@@ -152,7 +152,7 @@ const IntakeForm: React.FC = React.memo(() => {
               placeholder="www.yourbrand.com"
               aria-invalid={errors.brandName ? "true" : "false"}
               aria-describedby={errors.brandName ? "brand-error" : undefined}
-              className={`w-full bg-white/5 border ${errors.brandName ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors`}
+              className={`w-full bg-white/5 border ${errors.brandName ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-[#cb997e] focus:outline-none transition-colors`}
             />
             {errors.brandName && <p id="brand-error" className="text-xs text-red-500 mt-1 ml-1" role="alert">{errors.brandName.message}</p>}
           </div>
@@ -165,7 +165,7 @@ const IntakeForm: React.FC = React.memo(() => {
               defaultValue=""
               aria-invalid={errors.budget ? "true" : "false"}
               aria-describedby={errors.budget ? "budget-error" : undefined}
-              className={`w-full bg-white/5 border ${errors.budget ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors appearance-none`}
+              className={`w-full bg-white/5 border ${errors.budget ? 'border-red-500' : 'border-white/10'} rounded-2xl px-6 py-4 focus:border-[#cb997e] focus:outline-none transition-colors appearance-none`}
             >
               <option value="" disabled hidden className="bg-black">Select Tier</option>
               <option value="$1500-$3000" className="bg-black">$1,500 - $3,000</option>
@@ -186,7 +186,7 @@ const IntakeForm: React.FC = React.memo(() => {
                   aria-checked={selectedProjectType === type}
                   onClick={() => setValue('projectType', type as any)}
                   className={`py-3 rounded-xl text-sm font-bold border transition-all ${selectedProjectType === type
-                    ? 'bg-purple-600 border-purple-500 text-white'
+                    ? 'bg-[#6b705c] border-[#6b705c] text-white'
                     : 'bg-white/5 border-white/10 text-gray-400 hover:border-white/30'
                     }`}
                 >
@@ -203,7 +203,7 @@ const IntakeForm: React.FC = React.memo(() => {
               id="message"
               rows={4}
               placeholder="Tell me about your current struggles or project requirements..."
-              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors resize-none"
+              className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 focus:border-[#cb997e] focus:outline-none transition-colors resize-none"
             />
           </div>
 
@@ -215,7 +215,7 @@ const IntakeForm: React.FC = React.memo(() => {
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="w-full md:w-auto px-10 py-4 bg-white text-black font-black rounded-2xl hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-lg shadow-white/5 disabled:opacity-50"
+                className="w-full md:w-auto px-10 py-4 bg-[#6b705c] text-white font-black rounded-2xl hover:scale-105 transition-transform flex items-center justify-center gap-2 shadow-lg shadow-[#6b705c]/20 disabled:opacity-50"
               >
                 {status === 'loading' ? <Loader2 className="animate-spin" aria-hidden="true" /> : <Send size={20} aria-hidden="true" />}
                 Send Application

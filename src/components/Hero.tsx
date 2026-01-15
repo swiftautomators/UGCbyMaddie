@@ -9,22 +9,16 @@ const Hero: React.FC = React.memo(() => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 px-6">
       {/* Background Montage (Simulated) */}
-      <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black z-10" />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 opacity-20 h-full scale-110 rotate-3">
-          {[...Array(8)].map((_, i) => (
-            <div key={i} className="relative aspect-[9/16] bg-gray-900 rounded-3xl overflow-hidden border border-white/5">
-              <Image
-                src={`https://picsum.photos/400/700?random=${i}`}
-                fill
-                className="object-cover"
-                alt="Brand success content montage"
-                sizes="(max-width: 768px) 50vw, 25vw"
-                priority={i < 4}
-              />
-              <div className="absolute inset-0 bg-purple-500/10 animate-pulse-slow" />
-            </div>
-          ))}
+      <div className="absolute inset-0 z-0 bg-[#0a0a08]">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-[#0a0a08] z-10" />
+        <div className="absolute inset-0 opacity-30 h-full scale-105">
+          <Image
+            src="/assets/hero-montage.png"
+            fill
+            className="object-cover"
+            alt="Brand success content montage"
+            priority
+          />
         </div>
       </div>
 
@@ -35,7 +29,7 @@ const Hero: React.FC = React.memo(() => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#cb997e]/10 border border-[#cb997e]/20 text-[#cb997e] text-xs font-bold uppercase tracking-wider mb-6">
             <Zap size={14} className="fill-current" /> PERFORMANCE UGC STRATEGIST
           </div>
 
@@ -59,10 +53,10 @@ const Hero: React.FC = React.memo(() => {
 
           {/* Stats Bar */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-            <StatCard icon={<TrendingUp className="text-emerald-400" />} label="GMV Generated" value="$30.1K+" subtext="September 2024" />
-            <StatCard icon={<BarChart3 className="text-purple-400" />} label="Total Impressions" value="2.7M+" subtext="Across Clients" />
-            <StatCard icon={<Users className="text-indigo-400" />} label="Avg. ROAS" value="4.8x" subtext="TikTok Shop Ads" />
-            <StatCard icon={<Zap className="text-orange-400" />} label="Hook Rate" value="42%" subtext="Average Boost" />
+            <StatCard icon={<TrendingUp className="text-[#a5a58d]" />} label="GMV Generated" value="$30.1K+" subtext="September 2024" />
+            <StatCard icon={<BarChart3 className="text-[#cb997e]" />} label="Total Impressions" value="2.7M+" subtext="Across Clients" />
+            <StatCard icon={<Users className="text-[#b7b7a4]" />} label="Avg. ROAS" value="4.8x" subtext="TikTok Shop Ads" />
+            <StatCard icon={<Zap className="text-[#ddbea9]" />} label="Hook Rate" value="42%" subtext="Average Boost" />
           </div>
         </motion.div>
       </div>

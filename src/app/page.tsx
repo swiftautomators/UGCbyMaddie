@@ -47,12 +47,12 @@ export default function Home() {
     ];
 
     return (
-        <div className="min-h-screen selection:bg-purple-500/30">
+        <div className="min-h-screen selection:bg-[#cb997e]/30">
             {/* Navigation */}
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md py-4 border-b border-white/5' : 'bg-transparent py-6'}`}>
                 <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
                     <div className="flex items-center gap-2 group cursor-pointer">
-                        <div className="w-10 h-10 bg-gradient-to-tr from-purple-600 to-indigo-600 rounded-xl flex items-center justify-center font-bold text-xl rotate-3 group-hover:rotate-0 transition-transform">
+                        <div className="w-10 h-10 bg-gradient-to-tr from-[#6b705c] to-[#cb997e] rounded-xl flex items-center justify-center font-bold text-xl rotate-3 group-hover:rotate-0 transition-transform text-white">
                             M
                         </div>
                         <span className="font-heading font-bold text-xl tracking-tight">UGC by Maddie</span>
@@ -71,7 +71,7 @@ export default function Home() {
                         ))}
                         <a
                             href="#contact"
-                            className="px-5 py-2.5 bg-white text-black text-sm font-semibold rounded-full hover:bg-purple-50 transition-all hover:scale-105"
+                            className="px-5 py-2.5 bg-[#6b705c] text-white text-sm font-semibold rounded-full hover:bg-[#a5a58d] transition-all hover:scale-105"
                         >
                             Get Started
                         </a>
@@ -109,7 +109,7 @@ export default function Home() {
                         <a
                             href="#contact"
                             onClick={() => setIsMenuOpen(false)}
-                            className="mt-4 px-8 py-4 bg-purple-600 text-white rounded-full font-bold"
+                            className="mt-4 px-8 py-4 bg-[#6b705c] text-white rounded-full font-bold"
                         >
                             Book Strategy Call
                         </a>
@@ -132,7 +132,7 @@ export default function Home() {
                 <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                     <div>
                         <div className="flex items-center gap-2 mb-6">
-                            <div className="w-8 h-8 bg-purple-600 rounded-lg flex items-center justify-center font-bold">M</div>
+                            <div className="w-8 h-8 bg-[#6b705c] rounded-lg flex items-center justify-center font-bold text-white">M</div>
                             <span className="font-heading font-bold text-lg">UGC by Maddie</span>
                         </div>
                         <p className="text-gray-400 max-w-sm mb-8">
@@ -151,7 +151,7 @@ export default function Home() {
                         <div className="space-y-4">
                             <h4 className="font-bold text-lg">Work with me</h4>
                             <p className="text-gray-400">Ready to boost your direct-response ROI?</p>
-                            <a href="#contact" className="inline-flex items-center gap-2 text-purple-400 font-bold hover:text-purple-300">
+                            <a href="#contact" className="inline-flex items-center gap-2 text-[#cb997e] font-bold hover:text-[#ddbea9]">
                                 Inquire Now <ArrowRight size={16} />
                             </a>
                         </div>

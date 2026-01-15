@@ -11,7 +11,7 @@ const portfolioItems: PortfolioItem[] = [
     id: "1",
     title: "Eco-Friendly Cleaning",
     category: "Awareness",
-    thumbnail: "https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/home-thumb.png",
     stats: "1.2M Views",
     link: "#"
   },
@@ -19,39 +19,39 @@ const portfolioItems: PortfolioItem[] = [
     id: "2",
     title: "Premium Skincare",
     category: "Conversion",
-    thumbnail: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/beauty-thumb.png",
     stats: "$12K Sales",
     link: "#"
   },
   {
     id: "3",
-    title: "Tech Accessories",
+    title: "Wellness Essentials",
     category: "Education",
-    thumbnail: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/hero-montage.png",
     stats: "45% CTR",
     link: "#"
   },
   {
     id: "4",
-    title: "Fitness Apparel",
+    title: "Organic Growth",
     category: "Awareness",
-    thumbnail: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/beauty-thumb.png",
     stats: "800K Views",
     link: "#"
   },
   {
     id: "5",
-    title: "Home Decor",
+    title: "Modern Lifestyle",
     category: "Conversion",
-    thumbnail: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/home-thumb.png",
     stats: "ROAS 4.5x",
     link: "#"
   },
   {
     id: "6",
-    title: "Gourmet Snacks",
+    title: "Gourmet Strategy",
     category: "Education",
-    thumbnail: "https://images.unsplash.com/photo-1599490659223-ef52e3d53aa6?auto=format&fit=crop&q=80&w=800",
+    thumbnail: "/assets/hero-montage.png",
     stats: "20% Reorder",
     link: "#"
   }
@@ -69,7 +69,7 @@ const Portfolio: React.FC = React.memo(() => {
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#cb997e]/10 border border-[#cb997e]/20 text-[#cb997e] text-xs font-bold uppercase tracking-wider mb-6">
               PORTFOLIO
             </div>
             <h2 id="portfolio-heading" className="text-4xl md:text-6xl font-heading font-extrabold">The Performance Library</h2>
@@ -121,7 +121,7 @@ const Portfolio: React.FC = React.memo(() => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
 
                 <div className="absolute inset-0 p-8 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="text-purple-400 text-xs font-black uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
+                  <div className="text-[#cb997e] text-xs font-black uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
                     {item.category}
                   </div>
                   <h3 className="text-2xl font-heading font-bold mb-4">{item.title}</h3>
