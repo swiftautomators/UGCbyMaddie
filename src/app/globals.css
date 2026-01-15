@@ -3,29 +3,54 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 0, 0, 0;
+  --foreground-rgb: 255, 232, 214;
+  /* cream */
+  --background-rgb: 10, 10, 8;
+  /* extremely dark forest green-black */
+  --brand-terracotta: 203, 153, 126;
+  --brand-forest: 107, 112, 92;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: black;
+  background: #0a0a08;
+  background-image:
+    radial-gradient(circle at 10% 20%, rgba(107, 112, 92, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 90% 80%, rgba(203, 153, 126, 0.1) 0%, transparent 40%);
+  background-attachment: fixed;
 }
 
-.glass-card {
-  @apply backdrop-blur-xl bg-white/[0.03] border border-white/10;
+@layer components {
+  .glass-card {
+    @apply bg-white/[0.03] backdrop-blur-2xl border border-white/10;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.36);
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-[#ffe8d6] to-[#cb997e];
+  }
+
+  .brand-gradient {
+    @apply bg-gradient-to-br from-[#cb997e] to-[#6b705c];
+  }
 }
 
-.font-heading {
-  font-family: var(--font-jakarta);
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
 }
 
-@keyframes pulse-data {
-  0%, 100% { opacity: 0.2; transform: scale(1); }
-  50% { opacity: 0.5; transform: scale(1.05); }
-}
+@keyframes pulse {
 
-.animate-pulse-data {
-  animation: pulse-data 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
 }

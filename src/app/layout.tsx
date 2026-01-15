@@ -1,27 +1,35 @@
+import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Providers from "@/components/Providers";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta" });
+const inter = Inter({
+    subsets: ["latin"],
+    variable: "--font-inter",
+});
 
-export const metadata = {
-  title: "UGC by Maddie | Performance-Driven Creative",
-  description: "Performance UGC strategist portfolio specialized in scaling brands with data-backed content.",
+const plusJakartaSans = Plus_Jakarta_Sans({
+    subsets: ["latin"],
+    variable: "--font-jakarta",
+});
+
+export const metadata: Metadata = {
+    title: "UGC by Maddie | Performance-Driven Creative",
+    description: "Transforming brands into TikTok Shop powerhouses through high-aesthetic content that actually converts.",
 };
 
 export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${jakarta.variable} font-sans bg-black text-white antialiased`}>
-        <Providers>
-          {children}
-        </Providers>
-      </body>
-    </html>
-  );
+    children,
+}: Readonly<{
+    children: React.ReactNode;
+}>) {
+    return (
+        <html lang="en" className="scroll-smooth dark">
+            <body className={`${inter.variable} ${plusJakartaSans.variable} font-sans antialiased bg-[#0a0a08] text-white selection:bg-[#cb997e]/30`}>
+                <Providers>
+                    {children}
+                </Providers>
+            </body>
+        </html>
+    );
 }

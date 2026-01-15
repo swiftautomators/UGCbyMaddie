@@ -2,89 +2,75 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Play, Filter } from 'lucide-react';
-import Image from 'next/image';
-import { PortfolioItem } from '@/types';
+import { Play, TrendingUp, Filter, ChevronRight, Video } from 'lucide-react';
 
-const portfolioItems: PortfolioItem[] = [
+const projects = [
   {
-    id: "1",
-    title: "Eco-Friendly Cleaning",
-    category: "Awareness",
-    thumbnail: "https://images.unsplash.com/photo-1581578731548-c64695ce6958?auto=format&fit=crop&q=80&w=800",
+    id: 1,
+    title: "Organic Hook Strategy",
+    category: "TikTok Shop",
+    stats: "+24% CTR",
+    image: "/assets/beauty-thumb.png",
+    description: "Beauty brand scale using pattern-interrupt hooks."
+  },
+  {
+    id: 2,
+    title: "Paid Ads Creative",
+    category: "DTC Paid",
+    stats: "3.2x ROAS",
+    image: "/assets/home-thumb.png",
+    description: "High-retention creative for Facebook and TikTok ads."
+  },
+  {
+    id: 3,
+    title: "Product Showcase",
+    category: "Organic",
     stats: "1.2M Views",
-    link: "#"
+    image: "/assets/beauty-thumb.png",
+    description: "Educational storytelling for viral product discovery."
   },
   {
-    id: "2",
-    title: "Premium Skincare",
-    category: "Conversion",
-    thumbnail: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&q=80&w=800",
-    stats: "$12K Sales",
-    link: "#"
-  },
-  {
-    id: "3",
-    title: "Tech Accessories",
-    category: "Education",
-    thumbnail: "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&fit=crop&q=80&w=800",
-    stats: "45% CTR",
-    link: "#"
-  },
-  {
-    id: "4",
-    title: "Fitness Apparel",
-    category: "Awareness",
-    thumbnail: "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&q=80&w=800",
-    stats: "800K Views",
-    link: "#"
-  },
-  {
-    id: "5",
-    title: "Home Decor",
-    category: "Conversion",
-    thumbnail: "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=800",
-    stats: "ROAS 4.5x",
-    link: "#"
-  },
-  {
-    id: "6",
-    title: "Gourmet Snacks",
-    category: "Education",
-    thumbnail: "https://images.unsplash.com/photo-1599490659223-ef52e3d53aa6?auto=format&fit=crop&q=80&w=800",
-    stats: "20% Reorder",
-    link: "#"
+    id: 4,
+    title: "Direct Response",
+    category: "TikTok Shop",
+    stats: "$12K GMV",
+    image: "/assets/home-thumb.png",
+    description: "Conversion-optimized shop affiliate content."
   }
 ];
 
-const Portfolio: React.FC = React.memo(() => {
-  const [filter, setFilter] = useState('All');
+const categories = ["All", "TikTok Shop", "DTC Paid", "Organic"];
 
-  const filteredItems = filter === 'All'
-    ? portfolioItems
-    : portfolioItems.filter(item => item.category === filter);
+const Portfolio: React.FC = React.memo(() => {
+  const [activeTab, setActiveTab] = useState("All");
+
+  const filteredProjects = activeTab === "All"
+    ? projects
+    : projects.filter(p => p.category === activeTab);
 
   return (
-    <section id="portfolio" className="py-24 px-6" aria-labelledby="portfolio-heading">
+    <section id="portfolio" className="py-24 px-6 bg-black/30" aria-labelledby="portfolio-heading">
       <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-8">
           <div>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 border border-purple-500/20 text-purple-400 text-xs font-bold uppercase tracking-wider mb-6">
-              PORTFOLIO
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#cb997e]/10 border border-[#cb997e]/20 text-[#cb997e] text-xs font-bold uppercase tracking-wider mb-6">
+              <Video size={14} className="fill-current" /> PORTFOLIO
             </div>
-            <h2 id="portfolio-heading" className="text-4xl md:text-6xl font-heading font-extrabold">The Performance Library</h2>
+            <h2 id="portfolio-heading" className="text-4xl md:text-6xl font-heading font-extrabold text-white">
+              Creative That <br /><span className="text-transparent bg-clip-text bg-gradient-to-r from-[#cb997e] to-[#a5a58d]">Commands Action.</span>
+            </h2>
           </div>
 
-          <div className="flex flex-wrap gap-2" role="group" aria-label="Filter portfolio items">
-            {['All', 'Awareness', 'Education', 'Conversion'].map((cat) => (
+          <div className="flex items-center gap-2 bg-white/5 p-1 rounded-2xl border border-white/10" role="tablist">
+            {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setFilter(cat)}
-                aria-label={`Filter by ${cat}`}
-                aria-pressed={filter === cat}
-                className={`px-6 py-2.5 rounded-full text-sm font-bold transition-all ${filter === cat
-                  ? 'bg-white text-black shadow-lg shadow-white/10'
-                  : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                role="tab"
+                aria-selected={activeTab === cat}
+                onClick={() => setActiveTab(cat)}
+                className={`px-4 py-2 rounded-xl text-sm font-bold transition-all ${activeTab === cat
+                  ? 'bg-[#6b705c] text-white shadow-lg'
+                  : 'text-gray-400 hover:text-white'
                   }`}
               >
                 {cat}
@@ -95,55 +81,68 @@ const Portfolio: React.FC = React.memo(() => {
 
         <motion.div
           layout
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          role="list"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item) => (
+            {filteredProjects.map((project) => (
               <motion.div
+                key={project.id}
                 layout
-                key={item.id}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
-                role="listitem"
-                aria-label={`View details for ${item.title}`}
-                className="group relative aspect-[4/5] rounded-[2.5rem] overflow-hidden glass-card border-white/5"
+                className="group relative glass-card rounded-[2rem] overflow-hidden flex flex-col h-full"
               >
-                <Image
-                  src={item.thumbnail}
-                  alt={item.title}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent opacity-60 transition-opacity group-hover:opacity-80" />
-
-                <div className="absolute inset-0 p-8 flex flex-col justify-end translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                  <div className="text-purple-400 text-xs font-black uppercase tracking-widest mb-2 opacity-0 group-hover:opacity-100 transition-opacity delay-100">
-                    {item.category}
-                  </div>
-                  <h3 className="text-2xl font-heading font-bold mb-4">{item.title}</h3>
-
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/10">
-                      <Play size={14} fill="white" aria-hidden="true" />
-                      <span className="text-sm font-bold">{item.stats}</span>
+                <div className="aspect-[3/4] relative overflow-hidden">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                    <div className="w-14 h-14 rounded-full bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30">
+                      <Play className="text-white fill-current translate-x-0.5" />
                     </div>
-                    <a
-                      href={item.link}
-                      className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
-                      aria-label="Open project link"
-                    >
-                      <ExternalLink size={20} aria-hidden="true" />
-                    </a>
                   </div>
+                  <div className="absolute top-4 left-4">
+                    <span className="px-3 py-1 rounded-full bg-[#cb997e] text-white text-[10px] font-black uppercase tracking-widest shadow-lg">
+                      {project.stats}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="p-6 flex flex-col flex-grow">
+                  <div className="flex justify-between items-start mb-2">
+                    <span className="text-[#a5a58d] text-[10px] font-bold uppercase tracking-widest">
+                      {project.category}
+                    </span>
+                  </div>
+                  <h3 className="text-xl font-heading font-extrabold text-white mb-2">{project.title}</h3>
+                  <p className="text-sm text-gray-400 mb-6 flex-grow">{project.description}</p>
+
+                  <button className="w-full flex items-center justify-between group/btn text-sm font-bold text-gray-300 hover:text-white transition-colors">
+                    Watch Breakdown <ChevronRight size={18} className="group-hover/btn:translate-x-1 transition-transform" />
+                  </button>
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
+
+        <div className="mt-20 p-12 rounded-[3rem] bg-gradient-to-br from-[#cb997e]/10 to-transparent border border-[#cb997e]/20 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div className="flex items-center gap-6">
+            <div className="w-16 h-16 rounded-2xl bg-[#cb997e] flex items-center justify-center shadow-lg shadow-[#cb997e]/20">
+              <TrendingUp className="text-white" size={32} aria-hidden="true" />
+            </div>
+            <div>
+              <h3 className="text-2xl font-heading font-bold text-white mb-1">Average Hook Rate: 42%</h3>
+              <p className="text-gray-400">My videos stop the scroll and keep the attention.</p>
+            </div>
+          </div>
+          <a href="#contact" className="px-8 py-4 bg-white text-black font-bold rounded-2xl hover:scale-105 transition-transform flex items-center gap-2">
+            Get My Strategy <Filter size={18} />
+          </a>
+        </div>
       </div>
     </section>
   );
