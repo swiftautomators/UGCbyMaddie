@@ -1,3 +1,19 @@
+# Next.js
+.next/
+out/
+build
+
+# Playwright
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# Production
+.env.production
+.env.local
+.env.*.local
+
 # Logs
 logs
 *.log
@@ -10,7 +26,6 @@ lerna-debug.log*
 node_modules
 dist
 dist-ssr
-*.local
 
 # Editor directories and files
 .vscode/*
