@@ -1,0 +1,8 @@
+{
+  "name": "UGC by Maddie - Performance Strategist",
+  "description": "A high-performance portfolio for Maddie, a UGC strategist specializing in TikTok Shop affiliates with proven ROI and $30K+ GMV.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
