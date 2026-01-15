@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Send, Loader2, Zap } from 'lucide-react';
+import { Sparkles, Send, Loader2, Zap, AlertCircle } from 'lucide-react';
 import { generateStrategyAction } from '@/app/actions';
 import { useQuery } from '@tanstack/react-query';
 
@@ -13,20 +13,12 @@ const StrategyAI: React.FC = React.memo(() => {
   const { data: strategy, isLoading, error } = useQuery({
     queryKey: ['strategy', searchTerm],
     queryFn: async () => {
-      try {
-        return await generateStrategyAction(searchTerm);
-      } catch (err) {
-        console.error(err);
-        // Fallback if API fails
-        return {
-          hook: "Show the product in use with a high-impact 'Wait, I didn't know it could do that' sound.",
-          angle: "Utility-focused direct response with native TikTok UI overlays.",
-          why: "Social proof combined with a pattern interrupt works best for low-ticket affiliate impulse buys."
-        };
-      }
+      // Let the exception propagate so useQuery sets an actual error state
+      return await generateStrategyAction(searchTerm);
     },
     enabled: !!searchTerm,
     staleTime: 1000 * 60 * 60, // Cache for 1 hour
+    retry: false // Disable retries for AI generation to avoid multiple API calls on failure
   });
 
   const handleGenerate = () => {
@@ -56,6 +48,7 @@ const StrategyAI: React.FC = React.memo(() => {
                   onChange={(e) => setProduct(e.target.value)}
                   placeholder="e.g. Electric Spin Scrubber for cleaning"
                   aria-label="Enter your product niche"
+                  onKeyDown={(e) => e.key === 'Enter' && handleGenerate()}
                   className="w-full bg-black/50 border border-white/10 rounded-2xl px-6 py-4 focus:border-purple-500 focus:outline-none transition-colors group-hover:border-white/20"
                 />
                 <button
@@ -70,12 +63,12 @@ const StrategyAI: React.FC = React.memo(() => {
               </div>
             </div>
 
-            <div 
-              className="w-full md:w-80 min-h-[300px] glass-card rounded-2xl p-6 bg-black/40 border-purple-500/10 relative flex flex-col items-center justify-center overflow-hidden" 
+            <div
+              className="w-full md:w-80 min-h-[300px] glass-card rounded-2xl p-6 bg-black/40 border-purple-500/10 relative flex flex-col items-center justify-center overflow-hidden"
               aria-live="polite"
             >
               <AnimatePresence mode="wait">
-                {!strategy && !isLoading && (
+                {!strategy && !isLoading && !error && (
                   <motion.div
                     key="empty"
                     initial={{ opacity: 0 }}
@@ -102,13 +95,35 @@ const StrategyAI: React.FC = React.memo(() => {
                   </motion.div>
                 )}
 
-                {strategy && !isLoading && (
+                {error && !isLoading && (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="text-center p-4"
+                  >
+                    <div className="w-12 h-12 rounded-full bg-red-500/10 flex items-center justify-center mx-auto mb-4">
+                      <AlertCircle className="text-red-400" size={24} aria-hidden="true" />
+                    </div>
+                    <p className="text-sm font-bold text-red-400 mb-2">Generation Failed</p>
+                    <p className="text-xs text-gray-500 leading-relaxed">
+                      {(error as any).message || "Could not connect to Maddie's AI brain. Please try again."}
+                    </p>
+                  </motion.div>
+                )}
+
+                {strategy && !isLoading && !error && (
                   <motion.div
                     key="strategy"
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     className="space-y-6 w-full"
                   >
+                    {strategy.isFallback && (
+                      <div className="px-3 py-1 bg-amber-500/10 border border-amber-500/20 rounded-md mb-2">
+                        <p className="text-[10px] text-amber-400 font-bold uppercase">Dev Mode Enabled</p>
+                      </div>
+                    )}
                     <div>
                       <div className="text-[10px] font-black text-purple-400 uppercase mb-1">Winning Hook</div>
                       <div className="text-sm font-medium text-white italic">&ldquo;{strategy.hook}&rdquo;</div>

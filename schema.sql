@@ -26,22 +26,38 @@ CREATE TRIGGER update_submissions_updated_at
 -- Indexes
 CREATE INDEX idx_submissions_email ON submissions(email);
 
+-- Admin management table
+CREATE TABLE admins (
+  user_id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
 -- Enable RLS
+ALTER TABLE admins ENABLE ROW LEVEL SECURITY;
 ALTER TABLE submissions ENABLE ROW LEVEL SECURITY;
 
--- Policies
+-- Admin-only view to admins table
+CREATE POLICY "Admins view admins" ON admins
+FOR SELECT USING (auth.uid() IN (SELECT user_id FROM admins));
+
+-- Policies for submissions
+-- Note: Implement application-layer rate limiting in Next.js Server Actions.
 CREATE POLICY "Public insert submissions"
 ON submissions FOR INSERT
-WITH CHECK (true);
+WITH CHECK (
+  email ~* '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$' AND
+  project_type IS NOT NULL AND
+  budget_tier IS NOT NULL
+);
 
 CREATE POLICY "Admin view submissions"
 ON submissions FOR SELECT
-USING (auth.uid() IS NOT NULL);
+USING (auth.uid() IN (SELECT user_id FROM admins));
 
 CREATE POLICY "Admin update submissions"
 ON submissions FOR UPDATE
-USING (auth.uid() IS NOT NULL);
+USING (auth.uid() IN (SELECT user_id FROM admins));
 
 CREATE POLICY "Admin delete submissions"
 ON submissions FOR DELETE
-USING (auth.uid() IS NOT NULL);
+USING (auth.uid() IN (SELECT user_id FROM admins));
