@@ -52,23 +52,37 @@ Deno.serve(async (req) => {
         // Basic JSON extraction from AI response
         let cleanedJson = text;
         if (text.includes('```json')) {
-            cleanedJson = text.split('```json')[1].split('```')[0].trim();
+            cleanedJson = text.split('```json')[1]?.split('```')[0]?.trim() || text;
         } else if (text.includes('```')) {
-            cleanedJson = text.split('```')[1].split('```')[0].trim();
+            cleanedJson = text.split('```')[1]?.split('```')[0]?.trim() || text;
         }
 
-        const jsonResponse = JSON.parse(cleanedJson);
-
-        return new Response(
-            JSON.stringify({ ...jsonResponse, isFallback: false }),
-            { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
-        );
+        try {
+            const jsonResponse = JSON.parse(cleanedJson);
+            return new Response(
+                JSON.stringify({ ...jsonResponse, isFallback: false }),
+                { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+            );
+        } catch (parseError) {
+            console.error("JSON Parsing Error:", parseError, "Original text:", text);
+            return new Response(
+                JSON.stringify({
+                    hook: "Show the product in use with a high-impact 'Wait, I didn't know it could do that' sound.",
+                    angle: "Utility-focused direct response with native TikTok UI overlays (Parse Fallback).",
+                    why: "A pattern interrupt works best for low-ticket affiliate impulse buys.",
+                    isFallback: true,
+                    rawResponse: text.substring(0, 100)
+                }),
+                { headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+            );
+        }
 
     } catch (error) {
         console.error("Edge Function Error:", error);
-        return new Response(JSON.stringify({ error: error.message }), {
+        return new Response(JSON.stringify({ error: "Internal server error" }), {
             status: 500,
             headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         });
     }
+
 });

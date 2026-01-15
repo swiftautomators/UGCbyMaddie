@@ -14,10 +14,22 @@ export async function submitInquiryAction(data: {
         throw new Error("Critical: SUPABASE_SERVICE_ROLE_KEY or URL is not configured. SubmitInquiryAction aborted.");
     }
 
-    // Basic runtime validation
-    if (!data.email.includes('@')) {
+    const { formSchema } = await import('@/lib/schemas');
+
+    // Server-side validation with Zod
+    const validation = formSchema.safeParse({
+        name: (data.details as any).name,
+        email: data.email,
+        brandName: (data.details as any).brand_name,
+        budget: data.budget_tier,
+        projectType: data.project_type,
+        message: (data.details as any).message
+    });
+
+    if (!validation.success) {
         throw new Error("Invalid submission data.");
     }
+
 
     const supabase = createClient(supabaseUrl, supabaseKey);
 

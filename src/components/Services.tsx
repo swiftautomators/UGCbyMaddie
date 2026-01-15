@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle2, Zap, Layout, PlayCircle, ShieldCheck } from 'lucide-react';
+import { CheckCircle2, Zap, Layout, PlayCircle, ShieldCheck, ChevronRight } from 'lucide-react';
 import { ServicePackage } from '@/types';
 
 const packages: ServicePackage[] = [

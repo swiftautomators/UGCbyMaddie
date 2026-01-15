@@ -2,9 +2,6 @@
 trigger: always_on
 ---
 
-
-## mission.md (Reuse or Update from Previous)
-```markdown
 # MISSION: UGC by Maddie Website Redesign
 
 ## OBJECTIVE
@@ -38,4 +35,4 @@ Redesign ugcbymaddie.com as a performance-driven UGC strategist portfolio site, 
 - Libraries: framer-motion, react-hook-form, react-query
 
 ## DATABASE SCHEMA
-[From rules.md above]
+[From rules.md]

@@ -81,6 +81,7 @@ export default function Home() {
                     <button
                         className="md:hidden text-white"
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
+                        aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
                     >
                         {isMenuOpen ? <X /> : <Menu />}
                     </button>
@@ -142,8 +143,12 @@ export default function Home() {
                             <a href="/" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors" aria-label="Back to home">
                                 <Globe size={18} />
                             </a>
-                            <a href="mailto:Maddie@UGCbyMaddie.com" className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center hover:bg-white/5 transition-colors">
-                                <Mail size={18} />
+                            <a
+                                href="mailto:Maddie@UGCbyMaddie.com"
+                                className="w-12 h-12 rounded-full bg-white/5 border border-white/10 flex items-center justify-center hover:bg-[#cb997e] hover:border-[#cb997e] transition-colors"
+                                aria-label="Email Maddie"
+                            >
+                                <Mail size={20} />
                             </a>
                         </div>
                     </div>

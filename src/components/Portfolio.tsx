@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ExternalLink, Play, Filter } from 'lucide-react';
+import { ExternalLink, Play, Filter, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import { PortfolioItem } from '@/types';
 
@@ -131,14 +131,28 @@ const Portfolio: React.FC = React.memo(() => {
                       <Play size={14} fill="white" aria-hidden="true" />
                       <span className="text-sm font-bold">{item.stats}</span>
                     </div>
-                    <a
-                      href={item.link}
-                      className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
-                      aria-label="Open project link"
-                    >
-                      <ExternalLink size={20} aria-hidden="true" />
-                    </a>
+
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={() => {
+                          // TODO: Implement breakdown modal/video player
+                          console.log(`Watch breakdown for ${item.title}`);
+                        }}
+                        className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#6b705c] text-white text-sm font-bold hover:bg-[#a5a58d] transition-all"
+                      >
+                        Watch Breakdown <ChevronRight size={18} />
+                      </button>
+
+                      <a
+                        href={item.link}
+                        className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
+                        aria-label="Open project link"
+                      >
+                        <ExternalLink size={20} aria-hidden="true" />
+                      </a>
+                    </div>
                   </div>
+
                 </div>
               </motion.div>
             ))}

@@ -103,12 +103,13 @@ WITH CHECK (true);
 
 CREATE POLICY "Admin view submissions"
 ON submissions FOR SELECT
-USING (auth.uid() IS NOT NULL);  -- Assumes admin logged in via Supabase Auth
+USING (auth.jwt() ->> 'role' = 'admin');
 
 CREATE POLICY "Admin update submissions"
 ON submissions FOR UPDATE
-USING (auth.uid() IS NOT NULL);
+USING (auth.jwt() ->> 'role' = 'admin');
 
 CREATE POLICY "Admin delete submissions"
 ON submissions FOR DELETE
-USING (auth.uid() IS NOT NULL);
+USING (auth.jwt() ->> 'role' = 'admin');
+```
