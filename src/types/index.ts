@@ -11,7 +11,7 @@ export interface PortfolioItem {
   category: string;
   thumbnail: string;
   stats: string;
-  link: string;
+  link: string | null;
 }
 
 export interface SubmissionData {

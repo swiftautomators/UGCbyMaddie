@@ -13,7 +13,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Awareness",
     thumbnail: "/assets/home-thumb.png",
     stats: "1.2M Views",
-    link: "#"
+    link: null
   },
   {
     id: "2",
@@ -21,7 +21,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Conversion",
     thumbnail: "/assets/beauty-thumb.png",
     stats: "$12K Sales",
-    link: "#"
+    link: null
   },
   {
     id: "3",
@@ -29,7 +29,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Education",
     thumbnail: "/assets/hero-montage.png",
     stats: "45% CTR",
-    link: "#"
+    link: null
   },
   {
     id: "4",
@@ -37,7 +37,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Awareness",
     thumbnail: "/assets/beauty-thumb.png",
     stats: "800K Views",
-    link: "#"
+    link: null
   },
   {
     id: "5",
@@ -45,7 +45,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Conversion",
     thumbnail: "/assets/home-thumb.png",
     stats: "ROAS 4.5x",
-    link: "#"
+    link: null
   },
   {
     id: "6",
@@ -53,7 +53,7 @@ const portfolioItems: PortfolioItem[] = [
     category: "Education",
     thumbnail: "/assets/hero-montage.png",
     stats: "20% Reorder",
-    link: "#"
+    link: null
   }
 ];
 
@@ -143,13 +143,15 @@ const Portfolio: React.FC = React.memo(() => {
                         Watch Breakdown <ChevronRight size={18} />
                       </button>
 
-                      <a
-                        href={item.link}
-                        className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
-                        aria-label="Open project link"
-                      >
-                        <ExternalLink size={20} aria-hidden="true" />
-                      </a>
+                      {item.link && (
+                        <a
+                          href={item.link}
+                          className="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center hover:scale-110 transition-transform shadow-xl"
+                          aria-label="Open project link"
+                        >
+                          <ExternalLink size={20} aria-hidden="true" />
+                        </a>
+                      )}
                     </div>
                   </div>
 

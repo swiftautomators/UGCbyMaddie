@@ -78,6 +78,3 @@ Review the code review report. Address all CRITICAL and MEDIUM issues.
 Plan in artifacts/plan_refactor.md first.
 
 Wait for approval.
-
-## FOLLOW-UP PROMPTS
-Use the agent prompt sequence below, adapted for Claude Code.
