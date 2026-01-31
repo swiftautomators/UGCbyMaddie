@@ -8,19 +8,17 @@ export enum FunnelStage {
 export interface PortfolioItem {
   id: string;
   title: string;
-  stage: FunnelStage;
-  videoUrl: string;
+  category: string;
   thumbnail: string;
-  results?: string;
+  stats: string;
+  link: string | null;
 }
 
 export interface SubmissionData {
-  name: string;
   email: string;
-  brandName: string;
-  budget: string;
-  goal: string;
-  message: string;
+  project_type: 'TikTok Shop' | 'Paid Ads' | 'Organic Growth';
+  budget_tier: '$1500-$3000' | '$3000-$5000' | '>$5000';
+  details: Record<string, any>;
 }
 
 export interface ServicePackage {
